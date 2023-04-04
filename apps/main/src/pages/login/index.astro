@@ -1,0 +1,18 @@
+---
+import { Layout } from "@continuum-ai/ui";
+import Login from "../../components/Login.svelte";
+import { isLoggedIn } from "@continuum-ai/utilities";
+
+// Check if the user is already logged in.
+const user = await isLoggedIn(Astro.cookies);
+
+if (user) {
+  return Astro.redirect("/user");
+}
+---
+
+<Layout title="Login - Continuum">
+  <main>
+    <Login client:only />
+  </main>
+</Layout>

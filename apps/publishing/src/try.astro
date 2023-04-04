@@ -1,0 +1,136 @@
+---
+import { Story, StoryCard } from "./components/Stories";
+import { TabList, Tabs, Tab, TabPanel } from "./components/Tabs";
+
+const {
+	name,
+	stories,
+	follower_count,
+	following_count,
+	profile_picture,
+	biography,
+} = {
+	name: "Leslie Alexander",
+	stories: [
+		{
+			title: "One Photographer's Incredibly Initimate Portrait Of Her Sister",
+			date: "22/02/2023 15:47:23",
+			category: "Photography",
+			public_id: "awd",
+			cover: "https://picsum.photos/400/400",
+		},
+		{
+			title: "Inside The GLobal Fashon Summit Attempting To Un-Fuck The Planet",
+			date: "22/02/2023 15:47:23",
+			category: "Fashion",
+			public_id: "awd",
+			cover: "https://picsum.photos/300/600",
+		},
+		{
+			title: "Transforming The Neo-Classical Villa Into A Concrete Masterwork",
+			date: "21/02/2023 14:10:23",
+			category: "Architecture",
+			public_id: "awd",
+			cover: "https://picsum.photos/600/300",
+		},
+	],
+	follower_count: 27,
+	following_count: 53,
+	profile_picture: "https://picsum.photos/200/200",
+	biography:
+		"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+};
+---
+
+<div class="profile-head">
+	<img src={profile_picture} alt="" class="profile-picture" />
+	<div class="column">
+		<h1>{name}</h1>
+		<div class="row gap-md">
+			<span>{stories.length} stories</span>𐄁
+			<span>{follower_count} followers</span>𐄁
+			<span>Following {following_count}</span>
+		</div>
+	</div>
+</div>
+
+<div class="profile-body">
+	<Tabs>
+		<TabList>
+			<Tab>Stories</Tab>
+			<Tab>About</Tab>
+		</TabList>
+
+		<TabPanel>
+			<div class="stories">
+				{stories.length > 0 ? <Story story={stories[0]} /> : ""}
+				<div class="story-grid">
+					{stories.slice(1).map((x) => <StoryCard story={x} />)}
+				</div>
+			</div>
+		</TabPanel>
+
+		<TabPanel>
+			<div class="biography">
+				<p>{biography}</p>
+			</div>
+		</TabPanel>
+	</Tabs>
+</div>
+
+<style lang="scss">
+	.story-grid {
+		margin-top: 16px;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: auto;
+		grid-auto-flow: row;
+		grid-auto-rows: auto;
+		gap: 16px;
+	}
+
+	.profile-body {
+		max-width: 800px;
+	}
+
+	.stories,
+	.biography {
+		padding: 20px 0;
+		width: 100%;
+	}
+
+	.biography {
+		& p {
+			font-size: 20px;
+			line-height: 28px;
+			font-weight: 500;
+			color: #666666;
+		}
+	}
+
+	.profile-head {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 24px;
+		margin-bottom: 64px;
+
+		& .profile-picture {
+			width: 120px;
+			height: 120px;
+			border-radius: 50%;
+		}
+
+		& h1 {
+			font-size: 32px;
+			font-weight: 500;
+			color: #333;
+			margin-bottom: 4px;
+		}
+
+		& span {
+			color: #666;
+			font-size: 16px;
+		}
+	}
+</style>

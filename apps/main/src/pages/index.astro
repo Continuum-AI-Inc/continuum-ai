@@ -1,97 +1,100 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import { Layout, ProfileButton, Button } from "@continuum-ai/ui";
 ---
 
-<Layout title="Welcome to Astro.">
-	<main>
-		<h1>Welcome to <span class="text-gradient">Astro</span></h1>
-		<p class="instructions">
-			To get started, open the directory <code>src/pages</code> in your project.<br />
-			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
-		</p>
-		<ul role="list" class="link-card-grid">
-			<Card
-				href="https://docs.astro.build/"
-				title="Documentation"
-				body="Learn how Astro works and explore the official API docs."
-			/>
-			<Card
-				href="https://astro.build/integrations/"
-				title="Integrations"
-				body="Supercharge your project with new frameworks and libraries."
-			/>
-			<Card
-				href="https://astro.build/themes/"
-				title="Themes"
-				body="Explore a galaxy of community-built starter themes."
-			/>
-			<Card
-				href="https://astro.build/chat/"
-				title="Astro Community"
-				body="Come say hi to our amazing Astro Discord community. ❤️"
-			/>
-			<Card
-				href="https://nx.dev/"
-				title="Nx"
-				body="Learn more about Nx."
-			/>
-			<Card
-				href="https://nrwlcommunity.slack.com/"
-				title="Nrwl Community Slack"
-				body="Come chat in the Nrwl Community Slack. ❤️"
-			/>
-		</ul>
-	</main>
+<Layout title="Continuum | The platform for no-code development and design.">
+  <main class="px-8">
+    <div class="section">
+      <img src="/images/coding.svg" class="img-main" />
+      <div class="flex flex-col gap-4">
+        <h1>Community</h1>
+        <p>
+          At Continuum we believe in developers and the value they bring to each
+          company. To support that, we developed products ranging from one of
+          the most advanced website builders in the industry to analytics
+          solutions and more. Lightweight and tailored just for your needs.
+        </p>
+        <div class="flex flex-row gap-4">
+          <ProfileButton />
+          <Button link="/docs" theme="light">Docs</Button>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="row gap-lg section">
+      <div class="column">
+        <h1>Support</h1>
+        <p>
+          In order to help you reach your goals faster we developed solutions to
+          support you as best we can, most of what we do is open source and if
+          you need help, you can easily take a look at our <a href="/docs"
+            >docs</a
+          >.
+        </p>
+        <div class="row">
+          <Button link="/signup" theme="dark">Learn More</Button>
+        </div>
+      </div>
+      <img src="/images/working-man.svg" class="img-main" />
+    </div>
+    <div
+      class="row gap-lg section"
+      style="flex-direction: column; display: flex;">
+      <h1>Free. Forever.</h1>
+      <p style="width: 100%;">
+        We are a fully self-owned company, we don't have any investors to
+        satisfy but you, you invest your time to make the web a more beautiful
+        place and we want to support that as best we can. That means, no costs
+        when making your first steps. <a href="/privacy/"
+          >Learn about pricing and privacy.</a
+        >
+      </p>
+      <div class="flex flex-col lg:flex-row gap-4">
+        <div class="card">
+          <div class="flex flex-row items-center gap-4">
+            <img src="/logos/gyro.svg" />
+            <h3>Gyro</h3>
+          </div>
+          <p>
+            Export the source code at any time and use it freely in your
+            personal or commercial projects. It's FREE and always will be.
+          </p>
+          <Button link="/projects/gyro/">Learn More</Button>
+        </div>
+        <div class="card">
+          <div class="row center gap-xl">
+            <img src="/logos/meta.svg" />
+            <h3>Meta</h3>
+          </div>
+          <p>
+            Need some custom breakpoints? No problem, simply add them as you go
+            and use them freely without any restrictions.
+          </p>
+          <Button link="/projects/meta/">Learn More</Button>
+        </div>
+        <div class="card">
+          <div class="row center gap-xl">
+            <img src="/logos/deepend.svg" />
+            <h3>Deepend</h3>
+          </div>
+          <p>
+            Coming from a previous project and don't want to start all over
+            again? No problem, we've got you covered, you can import a project
+            or even add your own code at any time.
+          </p>
+          <Button link="/projects/meta/">Learn More</Button>
+        </div>
+      </div>
+    </div>
+  </main>
 </Layout>
 
-<style>
-	main {
-		margin: auto;
-		padding: 1.5rem;
-		max-width: 60ch;
-	}
+<style lang="scss">
+  .section {
+    @apply flex flex-col gap-4 lg:flex-row items-center mb-[160px];
+  }
 
-	h1 {
-		font-size: 3rem;
-		font-weight: 800;
-		margin: 0;
-	}
-
-	.text-gradient {
-		background-image: var(--accent-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 400%;
-		background-position: 0%;
-	}
-
-	.instructions {
-		line-height: 1.6;
-		margin: 1rem 0;
-		border: 1px solid rgba(var(--accent), 25%);
-		background-color: white;
-		padding: 1rem;
-		border-radius: 0.4rem;
-	}
-
-	.instructions code {
-		font-size: 0.875em;
-		font-weight: bold;
-		background: rgba(var(--accent), 12%);
-		color: rgb(var(--accent));
-		border-radius: 4px;
-		padding: 0.3em 0.45em;
-	}
-
-	.instructions strong {
-		color: rgb(var(--accent));
-	}
-
-	.link-card-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-		gap: 1rem;
-		padding: 0;
+	.card {
+		@apply border-2 rounded-lg border-slate-200 p-6;
 	}
 </style>

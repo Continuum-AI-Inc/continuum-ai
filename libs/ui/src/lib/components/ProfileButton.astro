@@ -1,0 +1,14 @@
+---
+import Button from "./Button.svelte";
+import { isLoggedIn } from "@continuum-ai/utilities";
+
+const user = await isLoggedIn(Astro.cookies);
+---
+
+{
+  user ? (
+    <Button link="/user">Dashboard</Button>
+  ) : (
+    <Button link="/login">Login</Button>
+  )
+}

@@ -1,0 +1,21 @@
+---
+import SettingsSidebar from "../components/SettingsSidebar.svelte";
+import { Layout } from "@continuum-ai/ui";
+---
+
+<Layout title="Dashboard - Continuum">
+  <main>
+    <SettingsSidebar />
+    <div class="container">
+      <slot />
+    </div>
+  </main>
+</Layout>
+
+<style lang="scss">
+  main {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 16px;
+  }
+</style>

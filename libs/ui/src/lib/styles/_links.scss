@@ -1,0 +1,12 @@
+a {
+	color: #56585d;
+	text-decoration: underline;
+	text-decoration-color: #3A86FF;
+	transition: color 0.4s ease;
+	display: inline-block;
+	font-size: 20px;
+
+	&:hover {
+		color: #111;
+	}
+}

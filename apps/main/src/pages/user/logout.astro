@@ -1,0 +1,24 @@
+---
+import {Button} from "@continuum-ai/ui";
+import { Layout } from "@continuum-ai/ui";
+---
+
+<script>
+  import Cookies from "js-cookie";
+
+  Cookies.remove("_C_TOKEN_");
+</script>
+
+<Layout title="Logout - Continuum">
+  <main class="column center gap-lg">
+    <h1>We'll see you soon!</h1>
+    <img src="/logout.gif" alt="Bye!" class="meme" />
+    <Button link="/">Take me Home!</Button>
+  </main>
+</Layout>
+
+<style>
+  .meme {
+    width: 600px;
+  }
+</style>

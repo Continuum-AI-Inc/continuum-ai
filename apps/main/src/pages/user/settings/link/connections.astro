@@ -1,0 +1,17 @@
+---
+import { getAllLinkConnections, getUser } from "@continuum-ai/utilities";
+import ConnectionOverview from "../../../../components/ConnectionOverview/index.svelte";
+import SettingsLayout from "../../../../layouts/SettingsLayout.astro";
+
+const user = await getUser(Astro.cookies);
+
+if (!user) {
+  return Astro.redirect("/login");
+}
+
+const connections = await getAllLinkConnections(user);
+---
+
+<SettingsLayout title="Dashboard - Continuum">
+  <ConnectionOverview connections={connections} user={user} />
+</SettingsLayout>

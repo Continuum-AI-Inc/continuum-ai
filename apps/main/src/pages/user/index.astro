@@ -1,0 +1,30 @@
+---
+import { getAllLinkConnections, getUser } from "@continuum-ai/utilities";
+import { Layout } from "@continuum-ai/ui";
+
+const user = await getUser(Astro.cookies);
+
+if (!user) {
+  return Astro.redirect("/login");
+}
+
+const connections = await getAllLinkConnections(user);
+---
+
+<Layout title="Dashboard - Continuum">
+  <main>
+    <a href="/user/settings">Settings</a>
+  </main>
+</Layout>
+
+<style lang="scss">
+  .container {
+    @apply flex flex-col rounded-lg bg-fg-secondary border-light h-full px-6 py-4 shadow-md border;
+  }
+
+  main {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 16px;
+  }
+</style>

@@ -1,0 +1,30 @@
+version: "3"
+
+tasks:
+  build:
+    cmds:
+      - pnpm exec nx build main
+      - rm /etc/nginx/sites-available/*
+      - rm /etc/nginx/sites-enabled/*
+      - cp ./nginx.conf /etc/nginx/sites-available/continuum-ai.de
+      - cp ./nginx.conf /etc/nginx/sites-enabled/continuum-ai.de
+      - nginx -t
+      - systemctl restart nginx
+      - pm2 restart main
+      - echo "Successfully restarted every service!"
+  update-nginx:
+    cmds:
+      - rm /etc/nginx/sites-available/*
+      - rm /etc/nginx/sites-enabled/*
+      - rm /etc/ssl/certs/*
+      - echo "Removed certificates!"
+      - cp ./private/ssl-key.cert /etc/ssl/certs/server.cert
+      - cp ./private/ssl-key.key /etc/ssl/certs/server.key
+      - cp ./nginx.conf /etc/nginx/sites-available/continuum-ai.de
+      - cp ./nginx.conf /etc/nginx/sites-enabled/continuum-ai.de
+      - nginx -t
+      - systemctl restart nginx
+      - pm2 restart main
+  setup:
+    cmds:
+      - echo "Setup!"

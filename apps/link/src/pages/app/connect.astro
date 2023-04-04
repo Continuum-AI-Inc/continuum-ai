@@ -1,0 +1,62 @@
+---
+// This page is accessed once a company has started a new validation process, a new window will
+// be opened on the users computer, pointing to this address.
+// The company must deliver the public_key and a scope attribute with the request
+// containing information about what they want to access.
+import {
+  getLinkApp,
+  getLinkConnection,
+  isLoggedIn,
+} from "@continuum-ai/utilities";
+
+const publicKey = Astro.url.searchParams.get("public_key");
+const scope = "public_profile," + Astro.url.searchParams.get("scope");
+
+// Check if the public id and scope attributes were actually given.
+if (!publicKey || !scope) {
+  return Astro.redirect("/app/invalid");
+}
+
+// Get the user from the current session.
+const user = await isLoggedIn(Astro.cookies);
+
+// If the user is not logged in, we redirect him to the login panel
+if (!user) {
+  return Astro.redirect("/login?redirect=" + encodeURI(Astro.url));
+}
+
+// Otherwise we need to find the actual app we want to connect to.
+const app = await getLinkApp(publicKey);
+
+// If the app doesn't exist in the database we know the app is invalid or the public_key is wrong.
+if (!app) {
+  return Astro.redirect("/app/invalid");
+}
+
+/**
+ * Check if the referrer domain and the app domain are the same.
+ * This is not a guarantee to sort out unwanted or spammy domains but it should remove most amateur attacks...
+ *
+ * This is simply because the http_referrer header can be modified by the user.
+ * But since we only send data to the domain listed in our database it should be fine...
+ */
+if (
+  process.env.NODE_ENV == "production" &&
+  Astro.request.referrer !== app.domain
+) {
+  return Astro.redirect("/app/malicious");
+}
+
+// Check if a link has already been established before.
+const link = await getLinkConnection(user, app);
+
+// If the link does exist already, we can tell the user that he is already linked
+if (link) {
+  return Astro.redirect(`/app/linked?public_key=${publicKey}`);
+} else {
+  // Otherwise the user must authorize the application.
+  return Astro.redirect(
+    `/app/authorize?public_key=${publicKey}&scope=${scope}`
+  );
+}
+---

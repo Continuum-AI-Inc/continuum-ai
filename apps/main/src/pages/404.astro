@@ -1,0 +1,41 @@
+---
+import { Layout, Button } from "@continuum-ai/ui";
+---
+
+<Layout title="404 - Not Found">
+  <main>
+    <div class="mid-center">
+      <div class="row center gap-lg justify-center">
+        <h1>4</h1>
+        <img src="/images/donut.png" />
+        <h1>4</h1>
+      </div>
+      <p style="text-align: center;">
+        Oopsie! It seems we donut find what you were looking for. The page you
+        searched for doesn't exist, isn't available or loaded incorrectly.
+      </p>
+      <Button link="/">Take me Home!</Button>
+    </div>
+  </main>
+</Layout>
+
+<style lang="scss">
+  .mid-center {
+    margin: auto;
+    display: flex;
+    max-width: 800px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    & div {
+      justify-content: center;
+      gap: 60px;
+    }
+
+    & h1 {
+      font-size: 180px;
+      margin: 0;
+    }
+  }
+</style>

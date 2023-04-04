@@ -1,0 +1,28 @@
+---
+import { getAllLinkConnections, getUser } from "@continuum-ai/utilities";
+import ConnectionList from "../../../../components/ConnectionList.svelte";
+import SettingsLayout from "../../../../layouts/SettingsLayout.astro";
+
+const user = await getUser(Astro.cookies);
+
+if (!user) {
+  return Astro.redirect("/login");
+}
+
+const connections = await getAllLinkConnections(user);
+---
+
+<SettingsLayout title="Dashboard - Continuum">
+  <h3>Public Data</h3>
+  <p>
+    If you are worried about the data that you are sending to any of the
+    third-party sites that you authenticate with, you can generate placeholders
+    and update your personal info here.
+  </p>
+  <p>
+    The data you enter here will not be used for your personal profile but will
+    be sent to third parties so that you can stay rather anonymous.
+  </p>
+  <h3>Update Links</h3>
+  <ConnectionList connections={connections} user={user} client:idle />
+</SettingsLayout>

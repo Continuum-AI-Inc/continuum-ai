@@ -1,0 +1,76 @@
+---
+/**
+ * @author Letsmoe
+ * @email moritz.utcke@gmx.de
+ * @create date 2022-11-19 13:33:00
+ * @modify date 2022-11-19 13:33:00
+ * @desc This page is accessed only from our server, the request contains information about the public_key of the application
+ * and the scope the application wants to access, we validate all that and show the user the option
+ * to link or to cancel the process.
+ */
+import LinkClose from "../../components/LinkClose.svelte";
+import { BlankLayout } from "@continuum-ai/ui";
+import {
+  getLinkApp,
+  getLinkConnection,
+  isLoggedIn,
+} from "@continuum-ai/utilities";
+
+const publicKey = Astro.url.searchParams.get("public_key");
+const scope = "public_profile," + Astro.url.searchParams.get("scope");
+
+// Check if the public id and scope attributes were actually given.
+if (!publicKey || !scope) {
+  return Astro.redirect("/app/invalid");
+}
+
+// Get the user from the current session.
+const user = await isLoggedIn(Astro.cookies);
+
+// If the user is not logged in, we redirect him to the login panel
+if (!user) {
+  return Astro.redirect("/login?redirect=" + encodeURI(Astro.url));
+}
+
+// Otherwise we need to find the actual app we want to connect to.
+const app = await getLinkApp(publicKey);
+
+// If the app doesn't exist in the database we know the app is invalid or the public_key is wrong.
+if (!app) {
+  return Astro.redirect("/app/invalid");
+}
+
+// Check if a link has already been established before.
+const link = await getLinkConnection(user, app);
+
+// If a link has not yet been established, redirect to the invalid page.
+if (!link) {
+  return Astro.redirect("/app/invalid");
+}
+
+const data = {
+  status: "connected",
+  auth_response: {
+    app_id: publicKey,
+    user_id: user.public_id,
+  },
+};
+---
+
+<BlankLayout title="Link - Success">
+  <div class="row mb-xl align-center">
+    <img src="https://continuum-ai.de/favicon.ico" class="round" />
+    <span class="connection"></span>
+    <img
+      src="https://cdn.dribbble.com/userupload/3158902/file/original-7c71bfa677e61dea61bc2acd59158d32.jpg?resize=400x0"
+      class="round"
+    />
+  </div>
+  <h1>You are Linked to <strong>{app.name}</strong></h1>
+  <LinkClose
+    data={data}
+    domain={app.domain}
+    closeImmediately={true}
+    client:load
+  />
+</BlankLayout>

@@ -1,0 +1,46 @@
+---
+import { BlankLayout } from "@continuum-ai/ui";
+---
+
+<BlankLayout title="Link - Malicious">
+  <div class="container">
+    <div class="row mb-xl align-center">
+      <img src="https://continuum-ai.de/favicon.ico" class="round" />
+      <span class="connection"></span>
+      <img
+        src="https://cdn.dribbble.com/userupload/3158902/file/original-7c71bfa677e61dea61bc2acd59158d32.jpg?resize=400x0"
+        class="round"
+      />
+    </div>
+    <h1><strong>Warning!</strong> We're blocking access to this App!</h1>
+    <div class="border-container gap-sm">
+      <div class="row gap-md">
+        <div class="material-symbols-outlined">dns</div>
+        <div class="column align-center">
+          <span class="condition-title">Incorrect Domain Name</span>
+          <span class="condition-description"
+            >The Domain of this Application does not match our records.</span
+          >
+        </div>
+      </div>
+      <div class="row gap-md">
+        <div class="material-symbols-outlined">fingerprint</div>
+        <div class="column align-center">
+          <span class="condition-title">Application ID</span>
+          <span class="condition-description"
+            >The unique Application ID does not correspond to this Domain or was
+            not registered.</span
+          >
+        </div>
+      </div>
+      <hr />
+      <button onclick="window.close()">Cancel</button>
+      <p>
+        Every Application needs to be registered on a server hosted by
+        Continuum-AI Inc.<br />An Application is identified by a unique
+        Application ID and it's Referring Domain Name, if you think you found an
+        issue, please <a href="">contact support</a>.
+      </p>
+    </div>
+  </div>
+</BlankLayout>

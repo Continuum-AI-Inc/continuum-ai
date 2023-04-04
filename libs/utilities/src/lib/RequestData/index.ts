@@ -1,0 +1,1 @@
+export { isContentTypeJson } from "./json"

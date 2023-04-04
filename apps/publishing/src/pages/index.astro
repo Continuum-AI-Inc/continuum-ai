@@ -1,0 +1,27 @@
+---
+import { Layout, Button } from "@continuum-ai/ui";
+import Feed from "../components/Feed/Feed.svelte";
+---
+
+<Layout title="Try Link">
+  <main>
+    <div class="container">
+      <h3>Publishing</h3>
+      <Button icon="explore">Explore</Button>
+      <Button icon="space_dashboard">Feed</Button>
+      <Button icon="subscriptions">Subscriptions</Button>
+      <h4 class="my-6">My Projects</h4>
+      <Button icon="edit">Stories</Button>
+      <Button icon="bookmark">Bookmarks</Button>
+    </div>
+    <Feed client:only />
+  </main>
+</Layout>
+
+<style lang="scss">
+  main {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 16px;
+  }
+</style>

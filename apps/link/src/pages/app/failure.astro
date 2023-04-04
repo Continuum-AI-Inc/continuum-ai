@@ -1,0 +1,27 @@
+---
+import { BlankLayout } from "@continuum-ai/ui";
+---
+
+<BlankLayout title="Link - Failure">
+  <main>
+    <div class="container">
+      <div class="row mb-xl align-center">
+        <img src="https://continuum-ai.de/favicon.ico" class="round" />
+        <span class="connection"></span>
+        <img
+          src="https://cdn.dribbble.com/userupload/3158902/file/original-7c71bfa677e61dea61bc2acd59158d32.jpg?resize=400x0"
+          class="round"
+        />
+      </div>
+      <h1>Failed establishing Link!</h1>
+      <div class="border-container gap-sm">
+        <button onclick="window.close()">Close</button>
+        <p>
+          Something went wrong while establishing the Link, this should not have
+          happened. Either the receiving end could not be reached or something
+          went wrong on our side, we are sorry for the inconvenience.
+        </p>
+      </div>
+    </div>
+  </main>
+</BlankLayout>

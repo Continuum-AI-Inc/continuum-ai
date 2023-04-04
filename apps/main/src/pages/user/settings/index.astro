@@ -1,0 +1,12 @@
+---
+import { getUser } from "@continuum-ai/utilities";
+import SettingsLayout from "../../../layouts/SettingsLayout.astro";
+
+const user = await getUser(Astro.cookies);
+
+if (!user) {
+  return Astro.redirect("/login");
+}
+---
+
+<SettingsLayout title="Dashboard - Continuum" />

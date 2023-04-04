@@ -1,47 +1,35 @@
 {
-  "plugins": [
-    "@nxtensions/astro"
-  ],
-  "npmScope": ".",
+  "plugins": ["@nxtensions/astro"],
+  "npmScope": "continuum-ai",
   "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*",
-      "sharedGlobals"
-    ],
-    "production": [
-      "default"
-    ],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "production": ["default", "!{projectRoot}/.eslintrc.json"],
     "sharedGlobals": []
   },
   "targetDefaults": {
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "inputs": [
-        "production",
-        "^production"
-      ]
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     },
     "check": {
+      "inputs": ["production", "^production"]
+    },
+    "e2e": {
+      "inputs": ["default", "^production"]
+    },
+    "lint": {
       "inputs": [
-        "production",
-        "^production"
+        "default",
+        "{workspaceRoot}/.eslintrc.json",
+        "{workspaceRoot}/.eslintignore"
       ]
     }
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/nx-cloud",
+      "runner": "nx/tasks-runners/default",
       "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e",
-          "check"
-        ],
-        "accessToken": "N2U5Mzc4NWItYmYwYy00ZWMxLWJjMDQtM2QzMmNhZTA3MmY2fHJlYWQtd3JpdGU="
+        "cacheableOperations": ["build", "lint", "test", "e2e", "check"]
       }
     }
   },
